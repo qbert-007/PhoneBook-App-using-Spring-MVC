@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:tx="http://www.springframework.org/schema/tx"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/tx 
+   http://www.springframework.org/schema/tx/spring-tx.xsd">
+   
+   <bean id="dmds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+   <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+   <property name="url" value="jdbc:mysql://localhost/phonebook?useSSL=false"></property>
+   <property name="username" value="root"></property>
+   <property name="password" value=""></property>
+   </bean>
+   
+   <bean id="mysessionfactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+   <property name="dataSource" ref="dmds"></property>
+   <property name="packagesToScan" value="com.qbert.model"></property>
+   <property name="annotatedClasses">
+   <list>
+   <value>com.qbert.model.User</value>
+   <value>com.qbert.model.Contacts</value>
+   </list>
+   </property>
+   <property name="hibernateProperties">
+      <props>
+         <prop key="hibernate.dialect">org.hibernate.dialect.MySQL55Dialect</prop>
+         <prop key="hibernate.hbm2ddl.auto">update</prop>
+         <prop key="hibernate.show_sql">true</prop>
+      </props>
+   </property>
+   </bean>
+   
+   <tx:annotation-driven/>
+ <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+<property name="sessionFactory" ref="mysessionfactory"/>
+ </bean>
+ 
+ <bean id="myTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+   <property name="sessionFactory" ref="mysessionfactory"></property>
+   <property name="checkWriteOperations" value="true"></property>
+   </bean>
+   
+   <bean id="beanDao" class="com.qbert.dataAccess.UserDaoImpl">
+   <property name="template" ref="myTemplate"></property>
+   </bean>
+   
+   </beans>
