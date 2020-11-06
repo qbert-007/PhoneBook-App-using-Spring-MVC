@@ -48,6 +48,8 @@ Technology and Concepts used----
 
 9-HibernateTemplate.
 
+10-Application-Context(XML Configuration).
+
 -------------------------------------------
 This application gives an basic understanding of how spring-mvc works and how to perform CRUD operations using Spring-Hibernate integration.
 --
