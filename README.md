@@ -1,6 +1,6 @@
 # PhoneBook-App-using-Spring-MVC
 
-A small PhoneBook or Contacts Application which lets you save your contacts into db and access the with your credentials.
+A small PhoneBook or Contacts Application which lets you save your contacts into db and access them using your credentials.
 
 ----------------------------------------------------------------
 
